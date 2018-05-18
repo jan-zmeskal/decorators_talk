@@ -34,7 +34,7 @@ def hello():
 
 # embed()
 """
-- Functions can accept functions as input and also return them
+⚡ Functions can accept functions as input and also return them
 """
 
 
@@ -45,10 +45,48 @@ def caller(func):
 
 
 def useless_function_factory(name):
-    """Returns a function that prints your name. Don't ask me why.""" 
+    """Returns a function that prints your name. Don't ask me why."""
     def name_printer():
         print("All hail to magnificient {}!".format(name))
     return name_printer
 
-embed()
 
+# embed()
+
+
+"""
+⚡ So what actually is decorator once once more?
+Function that:
+    - Takes function object as an arguemnt
+    - Enriches it somehow
+    - Returns function object again
+"""
+
+
+def poor_function():
+    print('😢')
+
+
+def enricher(input_function):
+    def output_function():
+        print("$$$ on the entry!")
+        input_function()
+        print("$$$ on the exit!")
+    return output_function
+
+
+# embed()
+
+
+"""
+⚡ How do we apply decorator properly?
+Let's use python syntatic sugar!
+@ is an annotation telling python that a decorator must be applied.
+"""
+
+@enricher
+def very_poor_function():
+    print('😢😢😢')
+
+
+embed()
