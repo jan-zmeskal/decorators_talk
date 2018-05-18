@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 
 
+import functools
+import time
+
+
 from IPython import embed
+from welcome import welcome
+from random import randint
 
+
+# embed()
 """
-⚡⚡⚡ Welcome to RHV QE Lightning Talk! ⚡⚡⚡
-Topic: Define Function Decorators with functools.wraps
-
 ⚡ What is decorator?
 A decorator is a function that takes a function object as its argument,
 and returns a function object,
@@ -23,7 +28,11 @@ The result of the wrapping?
 ⚡ A little bit of theory about functions:
 - Functions are objects like every other
 - They can be assigned to variables and passed around
-- Let's inspect some function: __repr__(), __name__ and __call__()
+- Let's inspect some function: 
+    __repr__()
+    __name__
+    __doc__
+    __call__()
 """
 
 
@@ -87,6 +96,82 @@ Let's use python syntatic sugar!
 @enricher
 def very_poor_function():
     print('😢😢😢')
+
+
+# embed()
+
+
+"""
+⚡ Let's do some more advanced stuff - timer!
+"""
+
+
+def timer(func):
+    """Decorator monitoring how much time does a func need to execute."""
+    def wrapper(*args, **kwargs):
+        time_at_start = time.time()
+        func(*args, **kwargs)
+        time_at_end = time.time() - time_at_start
+        print('{} took {} to execute'.format(func.__name__, time_at_end))
+    return wrapper
+
+
+@timer
+def busybody(iterations):
+    """Does a random calculation per iteration."""
+    for _ in range(iterations):
+        a = randint(1, 100)
+        b = randint(1, 200)
+        c = a + b
+        print('{} + {} = {}'.format(a, b, c))
+
+
+# embed()
+
+
+"""
+⚡ Now for something really cool.
+- Decorators can be used for keeping state information
+- This is because the "rebinding" takes place only once
+"""
+
+
+def call_counter(func):
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        func(*args, **kwargs)
+        print('{} was called {} times'.format(func.__name__, wrapper.count))
+    wrapper.count = 0
+    return wrapper
+
+
+@call_counter
+def relax():
+    """Not every function needs to work hard."""
+    pass
+
+
+# embed()
+"""
+⚡ Okay, that's all nice, but what about functools.wraps?
+- Problem: We are just calling wrapper functions defined inside decoraters
+- This breakes introspection!
+- Solution: functools.wraps copies metadata to the wrapper function
+"""
+
+
+def wait_before_start(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        time.sleep(3)
+        func(*args, **kwargs)
+    return wrapper
+
+
+@wait_before_start
+def goodbye():
+    """One last emoji for you."""
+    print('👋')
 
 
 embed()
