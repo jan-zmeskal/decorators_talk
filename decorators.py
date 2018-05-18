@@ -10,7 +10,8 @@ from welcome import welcome
 from random import randint
 
 
-# embed()
+welcome()
+embed()
 """
 ⚡ What is decorator?
 A decorator is a function that takes a function object as its argument,
@@ -28,7 +29,7 @@ The result of the wrapping?
 ⚡ A little bit of theory about functions:
 - Functions are objects like every other
 - They can be assigned to variables and passed around
-- Let's inspect some function: 
+- Let's inspect some function:
     __repr__()
     __name__
     __doc__
@@ -41,7 +42,7 @@ def hello():
     print('Hello, world of functions!')
 
 
-# embed()
+embed()
 """
 ⚡ Functions can accept functions as input and also return them
 """
@@ -60,7 +61,7 @@ def useless_function_factory(name):
     return name_printer
 
 
-# embed()
+embed()
 
 
 """
@@ -84,7 +85,7 @@ def enricher(input_function):
     return output_function
 
 
-# embed()
+embed()
 
 
 """
@@ -93,12 +94,13 @@ Let's use python syntatic sugar!
 @ is an annotation telling python that a decorator must be applied.
 """
 
+
 @enricher
 def very_poor_function():
     print('😢😢😢')
 
 
-# embed()
+embed()
 
 
 """
@@ -126,7 +128,7 @@ def busybody(iterations):
         print('{} + {} = {}'.format(a, b, c))
 
 
-# embed()
+embed()
 
 
 """
@@ -151,7 +153,7 @@ def relax():
     pass
 
 
-# embed()
+embed()
 """
 ⚡ Okay, that's all nice, but what about functools.wraps?
 - Problem: We are just calling wrapper functions defined inside decoraters
@@ -175,3 +177,12 @@ def goodbye():
 
 
 embed()
+"""
+⚡ What are decorators good for?
+- Few examples from CFME QE framework:
+    - Blocking test cases based on blockers
+    - Labeling test cases with tiers
+    - Assigning provides to test cases
+    - Adding metadata to test cases
+    - Choosing implementation for a test case - admin UI, self-service, REST
+"""
