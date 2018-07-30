@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Source of the awesome ASCII art: http://ascii.co.uk/art/redhat
 
 
@@ -41,11 +42,12 @@ rh_logo = """
 
 def welcome():
     print(rh_logo)
-    print('RHV QE LIGHTNING TALK')
+    print('⚡ RHV QE LIGHTNING TALK ⚡')
     print('Topic: Define Function Decorators with functools.wraps\n\n')
     print('Trigger warning:')
     print('Emoji have been used during development of this presentation.')
     print('If you\'re not able to handle their awesomenees, please leave now!')
+    print('')
 
 
 if __name__ == '__main__':
